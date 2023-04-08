@@ -3,6 +3,7 @@ const { body, validationResult } = require("express-validator");
 const router = express.Router();
 const MR = require("../Schemas/MR.js");
 const DOC = require("../Schemas/Doctor.js");
+const MrCounter = require("../Schemas/MrCtr.js");
 
 router.post(
   "/createDoc",
@@ -12,7 +13,7 @@ router.post(
     if (!err.isEmpty()) {
       res.send("Its your error");
     } else {
-      const success = DOC.findOne({ phone: req.body.phone }); //Duplicate validation check for phone numbers
+      const success = await DOC.findOne({ phone: req.body.phone }); //Duplicate validation check for phone numbers
       if (success) {
         res.send("Doctor exists");
       } else {
@@ -31,7 +32,7 @@ router.post(
               doc_name: req.body.name,
               speciality: req.body.speciality,
               degree: req.body.degree,
-              category: req.body.cateogy,
+              category: req.body.category,
               address: req.body.address,
               phone: req.body.phone,
               chamber_time: req.body.chamber_time,
@@ -43,7 +44,7 @@ router.post(
               doc_name: req.body.name,
               speciality: req.body.speciality,
               degree: req.body.degree,
-              category: req.body.cateogy,
+              category: req.body.category,
               address: req.body.address,
               phone: req.body.phone,
               chamber_time: req.body.chamber_time,
