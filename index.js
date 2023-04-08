@@ -3,6 +3,7 @@ const cors = require("cors");
 
 const dcrRoutes = require("./Routes/DcrRoutes.js");
 const MrRoutes = require("./Routes/MrRoutes.js");
+const docRoutes = require("./Routes/DocRoutes.js");
 //const path = require("path");
 
 const connectToMongo = require("./util/database");
@@ -17,6 +18,7 @@ app.use(express.json());
 app.post("/savedcr", dcrRoutes);
 
 app.post("/createMR", MrRoutes);
+app.post("/createDoc", docRoutes);
 
 // connectToMongo(() => {
 //   app.listen(port);

@@ -10,7 +10,4 @@ const mrCtrSchema = new mongoose.Schema({
 });
 
 const mrctr = mongoose.model("MRctr", mrCtrSchema);
-
-// const initial = new mrctr({ id: "mrval", seq: 1 });
-// initial.save();
 module.exports = mrctr;
