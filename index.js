@@ -17,7 +17,7 @@ app.use(express.json());
 
 app.post("/savedcr", dcrRoutes);
 
-app.post("/createMR", MrRoutes);
+app.use("/MRroutes", MrRoutes);
 app.post("/createDoc", docRoutes);
 
 // connectToMongo(() => {

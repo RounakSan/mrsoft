@@ -52,6 +52,23 @@ router.post(
 );
 
 // Assign doctors to MR
-router.post("/assignMR", async (res, req, next) => {});
+router.put("/assignMR", async (req, res, next) => {
+  let yes = false; //will be entered by user in front-end  ----> if true update
+  const e_id = req.body.emp_id;
+  const employee = await mr.findOne({ emp_id: e_id }); //no need to null check, because we will give user a list of MRs to select from
+
+  const docFilter = req.body.doc;
+  let saved = await DOC.findOne(docFilter);
+  if (saved.MRid && !yes) {
+    res.send("Fuck off mate! Waste of my bloody time");
+  } else {
+    saved = await DOC.findOneAndUpdate(
+      docFilter,
+      { MRid: employee._id },
+      { new: true }
+    );
+    res.send(saved);
+  }
+});
 
 module.exports = router;
