@@ -3,6 +3,7 @@ const { body, validationResult } = require("express-validator");
 const router = express.Router();
 const mr = require("../Schemas/MR.js");
 const DOC = require("../Schemas/Doctor.js");
+const AREA = require("../Schemas/Area");
 const MrCounter = require("../Schemas/MrCtr.js");
 
 //Create new MR
@@ -51,7 +52,7 @@ router.post(
   }
 );
 
-// Assign doctors to MR
+//Assign doctors to MR
 router.put("/assignMR", async (req, res, next) => {
   let yes = false; //will be entered by user in front-end  ----> if true update
   const e_id = req.body.emp_id;
@@ -69,6 +70,16 @@ router.put("/assignMR", async (req, res, next) => {
     );
     res.send(saved);
   }
+});
+
+router.get("/fetchMR", async (req, res, next) => {
+  const e_id = req.body.emp_id;
+  const employee = await mr.findOne({ emp_id: e_id });
+
+  //find employee using e_id
+  //find their corresponding areas
+  //find doctors in all areas of mr
+  //fetch all doctor in all mr areas
 });
 
 module.exports = router;

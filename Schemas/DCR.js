@@ -1,8 +1,9 @@
 const mongoose = require("mongoose");
 
 const DCR = new mongoose.Schema({
-  doc_name: {
-    type: String,
+  doc_object: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Doctor",
     required: true,
   },
   date: {
@@ -15,7 +16,8 @@ const DCR = new mongoose.Schema({
     required: true,
   },
   MRid: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "MR",
     required: true,
   },
 });

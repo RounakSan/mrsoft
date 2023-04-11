@@ -4,6 +4,7 @@ const router = express.Router();
 const MR = require("../Schemas/MR.js");
 const DOC = require("../Schemas/Doctor.js");
 const MrCounter = require("../Schemas/MrCtr.js");
+const Area = require("../Schemas/Area.js");
 
 router.post(
   "/createDoc",
@@ -58,10 +59,26 @@ router.post(
     }
   }
 );
+
+//Assigning Doctor to the respective areas
+router.post("/assignAreatoDoc", async (req, res, next) => {
+  const parameters = req.body.docs;
+  var temp = [];
+  parameters.forEach(async (e) => {
+    var doc = await DOC.findOne(e);
+    const updatedArea = await Area.findOneAndUpdate(
+      { area_id: req.body.area_id },
+      { $push: { doctor_ids: doc._id } },
+      { new: true }
+    );
+  });
+  res.send("Its Done");
+});
+
 module.exports = router;
 
 // {"doc_name": "Abhijit Sengupta",
-// "speciality": "Sexology",
+// "speciality": "Urology",
 // "degree": "Ph.D",
 // "category": "Core",
 // "address": ["12/A,qwerty,Kolkata-700016"],

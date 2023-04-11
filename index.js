@@ -4,6 +4,7 @@ const cors = require("cors");
 const dcrRoutes = require("./Routes/DcrRoutes.js");
 const MrRoutes = require("./Routes/MrRoutes.js");
 const docRoutes = require("./Routes/DocRoutes.js");
+const areaRoutes = require("./Routes/AreaRoutes");
 //const path = require("path");
 
 const connectToMongo = require("./util/database");
@@ -18,11 +19,8 @@ app.use(express.json());
 app.post("/savedcr", dcrRoutes);
 
 app.use("/MRroutes", MrRoutes);
-app.post("/createDoc", docRoutes);
-
-// connectToMongo(() => {
-//   app.listen(port);
-// });
+app.use("/DocRoutes", docRoutes);
+app.use("/areaRoutes", areaRoutes);
 
 app.listen(port, () => {
   console.log(`App Running on ${port}`);
