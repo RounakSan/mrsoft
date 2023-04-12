@@ -61,7 +61,7 @@ router.post(
 );
 
 //Assigning Doctor to the respective areas
-router.post("/assignAreatoDoc", async (req, res, next) => {
+router.post("/assignAreaToMR", async (req, res, next) => {
   const parameters = req.body.docs;
   var temp = [];
   parameters.forEach(async (e) => {
@@ -75,16 +75,29 @@ router.post("/assignAreatoDoc", async (req, res, next) => {
   res.send("Its Done");
 });
 
+router.get("/fetchAllDoc", async (req, res, next) => {
+  const doctors = await DOC.find({});
+  res.send(doctors); //to be updated later in frontend
+});
+
+router.get("/fetchDocforAllArea", async (req, res, next) => {
+  const allAreas = await Area.find({});
+  let areaToDoctors = {};
+  const wait = allAreas.map(async (a) => {
+    let temp = [];
+    if (a.doctor_ids) {
+      await Promise.all(
+        a.doctor_ids.map(async (d) => {
+          temp.push(await DOC.findOne({ _id: d }));
+        })
+      );
+    }
+    areaToDoctors[a.area_name] = temp;
+  });
+  await Promise.all(wait);
+  res.send(areaToDoctors);
+});
+
 module.exports = router;
 
-// {"doc_name": "Abhijit Sengupta",
-// "speciality": "Urology",
-// "degree": "Ph.D",
-// "category": "Core",
-// "address": ["12/A,qwerty,Kolkata-700016"],
-// "phone": "9208274002",
-// "chamber_time": {
-//   "dayOfWeek": [4],
-//   "time": ["2023-04-11T09:00:00Z"]}
-
-// }
+// mr wise categorization

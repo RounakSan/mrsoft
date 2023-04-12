@@ -72,14 +72,4 @@ router.put("/assignMR", async (req, res, next) => {
   }
 });
 
-router.get("/fetchMR", async (req, res, next) => {
-  const e_id = req.body.emp_id;
-  const employee = await mr.findOne({ emp_id: e_id });
-
-  //find employee using e_id
-  //find their corresponding areas
-  //find doctors in all areas of mr
-  //fetch all doctor in all mr areas
-});
-
 module.exports = router;
