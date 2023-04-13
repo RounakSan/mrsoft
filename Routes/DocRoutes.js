@@ -97,6 +97,32 @@ router.get("/fetchDocforAllArea", async (req, res, next) => {
   await Promise.all(wait);
   res.send(areaToDoctors);
 });
+// mrmapping i'll get the mrs to areas to the corresponding doctors of that area.
+router.get("/mrcategorization", async (req, res, next) => {
+  let MRmapping = {};
+  const MRs = await MR.find({});
+  const promises = MRs.map(async (m) => {
+    const areas = m.area_ids;
+    let areaToDoctors = {};
+
+    const areaPromise = areas.map(async (a) => {
+      const area = await Area.findOne({ _id: a }); //
+      let temp = [];
+      if (area.doctor_ids) {
+        await Promise.all(
+          area.doctor_ids.map(async (d) => {
+            temp.push(await DOC.findOne({ _id: d }));
+          })
+        );
+      }
+      areaToDoctors[area.area_name] = temp;
+    });
+    await Promise.all(areaPromise);
+    MRmapping[m.name] = areaToDoctors;
+  });
+  await Promise.all(promises);
+  res.send(MRmapping);
+});
 
 module.exports = router;
 
