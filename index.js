@@ -5,7 +5,6 @@ const dcrRoutes = require("./Routes/DcrRoutes.js");
 const MrRoutes = require("./Routes/MrRoutes.js");
 const docRoutes = require("./Routes/DocRoutes.js");
 const areaRoutes = require("./Routes/AreaRoutes");
-//const path = require("path");
 
 const connectToMongo = require("./util/database");
 

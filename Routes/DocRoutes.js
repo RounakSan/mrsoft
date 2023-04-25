@@ -5,6 +5,12 @@ const MR = require("../Schemas/MR.js");
 const DOC = require("../Schemas/Doctor.js");
 const MrCounter = require("../Schemas/MrCtr.js");
 const Area = require("../Schemas/Area.js");
+const fs = require("fs");
+const path = require("path");
+// //pdf generation
+var pdf = require("pdf-creator-node");
+// // Read HTML Template //pdf generation
+const html = fs.readFileSync(path.join(__dirname, "template.html"), "utf8"); //servinf files statically
 
 router.post(
   "/createDoc",
@@ -121,9 +127,62 @@ router.get("/mrcategorization", async (req, res, next) => {
     MRmapping[m.name] = areaToDoctors;
   });
   await Promise.all(promises);
-  res.send(MRmapping);
+  // res.send(MRmapping);
+  const htmlData = [];
+  for (const key in MRmapping) {
+    let temp = {};
+    temp["name"] = `${key}`;
+    temp["areas"] = {};
+    if (MRmapping[key]) {
+      for (const area in MRmapping[key]) {
+        temp["areas"][`${area}`] = [];
+        if (MRmapping[key][area]) {
+          temp["areas"][`${area}`] = MRmapping[key][area];
+        }
+      }
+    }
+    htmlData.push(temp);
+  }
+  console.log(htmlData);
+
+  // pdf generation
+
+  var options = {
+    format: "A4",
+    orientation: "portrait",
+    border: "10mm",
+    header: {
+      height: "45mm",
+      contents: '<div style="text-align: center;">Author: MRSoft</div>',
+    },
+    footer: {
+      height: "28mm",
+      contents: {
+        first: "Cover page",
+        2: "Second page", // Any page number is working. 1-based index
+        default:
+          '<span style="color: #444;">{{page}}</span>/<span>{{pages}}</span>', // fallback value
+        last: "Last Page",
+      },
+    },
+  };
+  //console.log(MRmapping);
+  var document = {
+    html: html,
+    data: {
+      htmlData: htmlData,
+    },
+    path: "./output.pdf",
+    type: "",
+  };
+  pdf
+    .create(document, options)
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 });
 
 module.exports = router;
-
-// mr wise categorization
