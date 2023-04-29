@@ -5,12 +5,6 @@ const MR = require("../Schemas/MR.js");
 const DOC = require("../Schemas/Doctor.js");
 const MrCounter = require("../Schemas/MrCtr.js");
 const Area = require("../Schemas/Area.js");
-const fs = require("fs");
-const path = require("path");
-// //pdf generation
-var pdf = require("pdf-creator-node");
-// // Read HTML Template //pdf generation
-const html = fs.readFileSync(path.join(__dirname, "template.html"), "utf8"); //servinf files statically
 
 router.post(
   "/createDoc",
@@ -107,6 +101,7 @@ router.get("/fetchDocforAllArea", async (req, res, next) => {
 router.get("/mrcategorization", async (req, res, next) => {
   let MRmapping = {};
   const MRs = await MR.find({});
+
   const promises = MRs.map(async (m) => {
     const areas = m.area_ids;
     let areaToDoctors = {};
@@ -144,45 +139,6 @@ router.get("/mrcategorization", async (req, res, next) => {
     htmlData.push(temp);
   }
   console.log(htmlData);
-
-  // pdf generation
-
-  var options = {
-    format: "A4",
-    orientation: "portrait",
-    border: "10mm",
-    header: {
-      height: "45mm",
-      contents: '<div style="text-align: center;">Author: MRSoft</div>',
-    },
-    footer: {
-      height: "28mm",
-      contents: {
-        first: "Cover page",
-        2: "Second page", // Any page number is working. 1-based index
-        default:
-          '<span style="color: #444;">{{page}}</span>/<span>{{pages}}</span>', // fallback value
-        last: "Last Page",
-      },
-    },
-  };
-  //console.log(MRmapping);
-  var document = {
-    html: html,
-    data: {
-      htmlData: htmlData,
-    },
-    path: "./output.pdf",
-    type: "",
-  };
-  pdf
-    .create(document, options)
-    .then((res) => {
-      console.log(res);
-    })
-    .catch((error) => {
-      console.error(error);
-    });
 });
 
 module.exports = router;

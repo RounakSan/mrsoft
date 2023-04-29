@@ -24,7 +24,8 @@
     "mongodb": "^5.1.0",
     "mongoose": "^7.0.3",
     "pdf-creator-node": "^2.3.5",
-    "pdfkit": "^0.13.0"
+    "pdfkit": "^0.13.0",
+    "pdfmake": "^0.2.7"
   },
   "devDependencies": {
     "nodemon": "^2.0.22"
