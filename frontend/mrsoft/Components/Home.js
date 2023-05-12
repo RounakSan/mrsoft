@@ -11,15 +11,17 @@ import {
   Pressable,
   Icon,
 } from "native-base";
-import { SafeAreaView } from "react-native";
+import { SafeAreaView, StyleSheet, Platform, StatusBar } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
+
 import Footer from "./Footer";
 const config = {
   dependencies: {
     "linear-gradient": LinearGradient,
   },
 };
+import SafeViewAndroid from "./SafeViewAndroid";
 export default function Home({ navigation }) {
   const [selected, setSelected] = React.useState(1);
   const s = {
@@ -31,8 +33,9 @@ export default function Home({ navigation }) {
   };
   return (
     <NativeBaseProvider config={config}>
+    <Box h="105%">  
       <Box w="100%" h="40%" bg={s}>
-        <SafeAreaView>
+        <SafeAreaView style={SafeViewAndroid.AndroidSafeArea}>
           <Center
             _text={{
               color: "warmGray.50",
@@ -84,8 +87,11 @@ export default function Home({ navigation }) {
             </Button>
           </VStack>
         </Box>
+        
       </SafeAreaView>
-      <Footer />
+      <Footer/>
+     </Box> 
     </NativeBaseProvider>
   );
 }
+

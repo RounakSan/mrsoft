@@ -14,12 +14,26 @@ import {
 } from "native-base";
 import { useState, useEffect } from "react";
 import Footer from "./Footer";
+import SafeViewAndroid from "./SafeViewAndroid";
+import { LinearGradient } from "expo-linear-gradient";
+const config = {
+  dependencies: {
+    "linear-gradient": LinearGradient,
+  },
+};
 export default function ListedDoctors({ navigation }) {
   const [data, setData] = useState(null);
+  const s = {
+    linearGradient: {
+      colors: ["lightBlue.300", "violet.800"],
+      start: [1, 1],
+      end: [1, 0],
+    },
+  };
   const getDocs = async () => {
     try {
       const response = await fetch(
-        `http://192.168.0.123:3000/docRoutes/fetchAllDoc`,
+        `http://192.168.0.187:3000/docRoutes/fetchAllDoc`,
         {
           method: "GET",
           headers: {
@@ -38,8 +52,8 @@ export default function ListedDoctors({ navigation }) {
   }, []);
 
   return (
-    <NativeBaseProvider>
-      <SafeAreaView>
+    <NativeBaseProvider config={config}>
+      {/*
         <HStack space={30} justifyContent="space-between">
           <Button
             onPress={() => {
@@ -49,14 +63,16 @@ export default function ListedDoctors({ navigation }) {
             Back
           </Button>
         </HStack>
-      </SafeAreaView>
+           */}
       {/* {console.log(data)} */}
-      <Box w="100%" h="79.65%">
-        <Box>
-          <Heading fontSize="xl" p="4" pb="3">
+      <SafeAreaView style={SafeViewAndroid.AndroidSafeArea}> 
+      <Box w="100%" h="92.65%">
+        <Box >
+        
+          <Heading fontSize="xl" paddingBottom="1" textAlign={"center"} bg="" >
             Listed doctor
           </Heading>
-
+          
           <ScrollView>
             <List>
               <FlatList
@@ -76,7 +92,7 @@ export default function ListedDoctors({ navigation }) {
                       <Avatar
                         size="48px"
                         source={{
-                          uri: "https://upload.wikimedia.org/wikipedia/commons/a/ae/People%27s_doctor_of_the_USSR",
+                          uri: "#",
                         }}
                       />
                       <VStack>
@@ -126,7 +142,9 @@ export default function ListedDoctors({ navigation }) {
           </ScrollView>
         </Box>
       </Box>
+      
       <Footer />
+      </SafeAreaView>
     </NativeBaseProvider>
   );
 }

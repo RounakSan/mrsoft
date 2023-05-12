@@ -27,11 +27,11 @@ export default function Footer() {
   };
   return (
     <NativeBaseProvider config={config}>
-      <HStack bg={s} alignItems="center" safeAreaBottom shadow={6}>
+      <HStack bg={s} alignItems="center" safeAreaBottom shadow={6} marginTop="2">
         <Pressable
           cursor="pointer"
           opacity={selected === 0 ? 1 : 0.5}
-          py="3"
+          py="5"
           flex={1}
           onPress={() => setSelected(0)}
         >
