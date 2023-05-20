@@ -1,0 +1,6 @@
+Scenario 1:
+Assigning MRs to repective cluster and their doctors.
+So that it syncs with the doctors and it is shown automatically when MR login.
+
+Features:
+Geolocation

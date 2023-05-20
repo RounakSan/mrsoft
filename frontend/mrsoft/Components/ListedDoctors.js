@@ -15,6 +15,7 @@ import {
 import { useState, useEffect } from "react";
 import Footer from "./Footer";
 import SafeViewAndroid from "./SafeViewAndroid";
+
 import { LinearGradient } from "expo-linear-gradient";
 const config = {
   dependencies: {
@@ -23,13 +24,7 @@ const config = {
 };
 export default function ListedDoctors({ navigation }) {
   const [data, setData] = useState(null);
-  const s = {
-    linearGradient: {
-      colors: ["lightBlue.300", "violet.800"],
-      start: [1, 1],
-      end: [1, 0],
-    },
-  };
+
   const getDocs = async () => {
     try {
       const response = await fetch(
@@ -49,41 +44,38 @@ export default function ListedDoctors({ navigation }) {
   };
   useEffect(() => {
     getDocs();
+    // console.log(data);
   }, []);
 
+  const s = {
+    linearGradient: {
+      colors: ["lightBlue.300", "violet.800"],
+      start: [1, 1],
+      end: [1, 0],
+    },
+  };
   return (
     <NativeBaseProvider config={config}>
-      {/*
-        <HStack space={30} justifyContent="space-between">
-          <Button
-            onPress={() => {
-              navigation.goBack();
-            }}
-          >
-            Back
-          </Button>
-        </HStack>
-           */}
-      {/* {console.log(data)} */}
       <SafeAreaView style={SafeViewAndroid.AndroidSafeArea}> 
       <Box w="100%" h="92.65%">
         <Box >
         
-          <Heading fontSize="xl" paddingBottom="1" textAlign={"center"} bg="" >
+          <Heading fontSize="xl" paddingBottom="1" textAlign={"center"} bg="lightBlue.300" >
             Listed doctor
           </Heading>
           
           <ScrollView>
-            <List>
-              <FlatList
-                data={data}
-                renderItem={({ item }) => (
-                  <Box
+    
+                <VStack>
+                  {data!=null && data.map((item,index)=>{
+                    return(
+                    <Box
+                    key={index}
                     borderBottomWidth="1"
                     _dark={{
-                      borderColor: "muted.50",
+                      borderColor: "muted.900",
                     }}
-                    borderColor="muted.800"
+                    borderColor="muted.300"
                     pl={["0", "4"]}
                     pr={["0", "5"]}
                     py="2"
@@ -135,10 +127,9 @@ export default function ListedDoctors({ navigation }) {
                       </Text>
                     </HStack>
                   </Box>
-                )}
-                keyExtractor={(item) => item.id}
-              />
-            </List>
+                  )})}
+                  
+                  </VStack>
           </ScrollView>
         </Box>
       </Box>

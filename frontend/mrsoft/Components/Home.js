@@ -22,6 +22,7 @@ const config = {
   },
 };
 import SafeViewAndroid from "./SafeViewAndroid";
+
 export default function Home({ navigation }) {
   const [selected, setSelected] = React.useState(1);
   const s = {
@@ -33,7 +34,7 @@ export default function Home({ navigation }) {
   };
   return (
     <NativeBaseProvider config={config}>
-    <Box h="105%">  
+    <Box h="105%"> 
       <Box w="100%" h="40%" bg={s}>
         <SafeAreaView style={SafeViewAndroid.AndroidSafeArea}>
           <Center
@@ -61,9 +62,9 @@ export default function Home({ navigation }) {
                 <ChevronRightIcon alignItems="flex-end" />
               </HStack>
             </Button>
-            <Button w="85%" variant="outline" colorScheme="secondary">
+            <Button w="85%" variant="outline" colorScheme="secondary" onPress={()=>{navigation.navigate("MySchedule");}}>
               <HStack space={40}>
-                <Text alignItems="flex-start">Outreached</Text>
+                <Text alignItems="flex-start">My Schedule</Text>
                 <ChevronRightIcon alignItems="flex-end" />
               </HStack>
             </Button>
@@ -75,7 +76,7 @@ export default function Home({ navigation }) {
             </Button>
             <Button w="85%" variant="outline">
               <HStack space={40}>
-                <Text>ritam santra</Text>
+                <Text>Ritam Santra</Text>
                 <ChevronRightIcon ml="10" />
               </HStack>
             </Button>
