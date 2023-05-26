@@ -28,7 +28,7 @@ export default function ListedDoctors({ navigation }) {
   const getDocs = async () => {
     try {
       const response = await fetch(
-        `http://192.168.0.187:3000/docRoutes/fetchAllDoc`,
+        `http://192.168.0.193:3000/docRoutes/fetchAllDoc`,
         {
           method: "GET",
           headers: {
@@ -60,7 +60,7 @@ export default function ListedDoctors({ navigation }) {
       <Box w="100%" h="92.65%">
         <Box >
         
-          <Heading fontSize="xl" paddingBottom="1" textAlign={"center"} bg="lightBlue.300" >
+          <Heading fontSize="xl" paddingBottom="1" textAlign={"center"} bg="violet.400" >
             Listed doctor
           </Heading>
           

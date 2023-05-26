@@ -23,74 +23,75 @@ const config = {
   },
 };
 
-export default function Agenda(props) {
+export default function Agenda() {
+  const docs = [
+    { name: "sex", time: "midnight", speciality: "hotsex", phone: 5845159565 },
+    { name: "sex", time: "midnight", speciality: "hotsex", phone: 5845159565 },
+    { name: "sex", time: "midnight", speciality: "hotsex", phone: 5845159565 },
+    { name: "sex", time: "midnight", speciality: "hotsex", phone: 5845159565 },
+    { name: "sex", time: "midnight", speciality: "hotsex", phone: 5845159565 },
+    { name: "sex", time: "midnight", speciality: "hotsex", phone: 5845159565 },
+    { name: "sex", time: "midnight", speciality: "hotsex", phone: 5845159565 },
+  ];
   return (
     <NativeBaseProvider config={config}>
       <Box w="100%" h="92.65%">
-          
-          {/* Take this heading out so that it doesnot render everytime */}
-          <Heading
-            fontSize="xl"
-            paddingBottom="1"
-            textAlign={"center"}
-            bg="lightBlue.300"
-          >
-            Agenda for {props.date}
-          </Heading>
-
           <ScrollView>
             <VStack>
-              <Box
-                borderBottomWidth="1"
-                _dark={{
-                  borderColor: "muted.900",
-                }}
-                borderColor="muted.300"
-                pl={["0", "4"]}
-                pr={["0", "5"]}
-                py="2"
-              >
-                <HStack space={[2, 3]} justifyContent="space-between">
-                  <VStack>
+              {docs.map((item,index)=>{
+                return(<Box key={index}
+                  borderBottomWidth="1"
+                  _dark={{
+                    borderColor: "muted.900",
+                  }}
+                  borderColor="muted.300"
+                  px="5"
+                  py="2"
+                >
+                  <HStack space={[2, 3]} justifyContent="space-between">
+                    <VStack>
+                      <Text
+                        _dark={{
+                          color: "warmGray.50",
+                        }}
+                        color="coolGray.800"
+                        bold
+                      >
+                        {item.name}
+                      </Text>
+                      <Text
+                        color="coolGray.600"
+                        _dark={{
+                          color: "warmGray.200",
+                        }}
+                      >
+                        {item.time}
+                      </Text>
+                      <Text
+                        color="coolGray.600"
+                        _dark={{
+                          color: "warmGray.200",
+                        }}
+                      >
+                        {item.speciality}
+                      </Text>
+                    </VStack>
+                    <Spacer />
                     <Text
+                      fontSize="xs"
                       _dark={{
                         color: "warmGray.50",
                       }}
                       color="coolGray.800"
-                      bold
+                      alignSelf="flex-start"
                     >
-                      {props.name}
+                      {item.phone}
                     </Text>
-                    <Text
-                      color="coolGray.600"
-                      _dark={{
-                        color: "warmGray.200",
-                      }}
-                    >
-                      {props.time}
-                    </Text>
-                    <Text
-                      color="coolGray.600"
-                      _dark={{
-                        color: "warmGray.200",
-                      }}
-                    >
-                      {props.speciality}
-                    </Text>
-                  </VStack>
-                  <Spacer />
-                  <Text
-                    fontSize="xs"
-                    _dark={{
-                      color: "warmGray.50",
-                    }}
-                    color="coolGray.800"
-                    alignSelf="flex-start"
-                  >
-                    {props.phone}
-                  </Text>
-                </HStack>
-              </Box>
+                  </HStack>
+                </Box>)
+              }
+              )}
+              
             </VStack>
           </ScrollView>
       </Box>
