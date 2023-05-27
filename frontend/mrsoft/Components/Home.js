@@ -62,7 +62,7 @@ export default function Home({ navigation }) {
                 <ChevronRightIcon alignItems="flex-end" />
               </HStack>
             </Button>
-            <Button w="85%" variant="outline" colorScheme="secondary" onPress={()=>{navigation.navigate("AgendaItem");}}>
+            <Button w="85%" variant="outline" colorScheme="secondary" onPress={()=>{navigation.navigate("expandableCalendarScreen");}}>
               <HStack space={40}>
                 <Text alignItems="flex-start">My Schedule</Text>
                 <ChevronRightIcon alignItems="flex-end" />
