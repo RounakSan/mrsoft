@@ -1,5 +1,5 @@
 import React, {useRef, useCallback} from 'react';
-import {StyleSheet} from 'react-native';
+import {SafeAreaView, StyleSheet,Platform,StatusBar} from 'react-native';
 import {ExpandableCalendar, AgendaList, CalendarProvider, WeekCalendar} from 'react-native-calendars';
 import testIDs from '../testIDs';
 import {agendaItems, getMarkedDates} from '../mocks/agendaItems';
@@ -15,6 +15,7 @@ interface Props {
 }
 
 const ExpandableCalendarScreen = (props: Props) => {
+  
   const {weekView} = props;
   const marked = useRef(getMarkedDates());
   const theme = useRef(getTheme());
@@ -33,8 +34,10 @@ const ExpandableCalendarScreen = (props: Props) => {
   const renderItem = useCallback(({item}: any) => {
     return <AgendaItem item={item}/>;
   }, []);
+  
 
   return (
+    <SafeAreaView style={styles.AndroidSafeArea}> 
     <CalendarProvider
       date={ITEMS[1]?.title}
       // onDateChanged={onDateChanged}
@@ -74,7 +77,7 @@ const ExpandableCalendarScreen = (props: Props) => {
         sectionStyle={styles.section}
         // dayFormat={'yyyy-MM-d'}
       />
-    </CalendarProvider>
+    </CalendarProvider></SafeAreaView>
   );
 };
 
@@ -92,5 +95,9 @@ const styles = StyleSheet.create({
     backgroundColor: lightThemeColor,
     color: 'grey',
     textTransform: 'capitalize'
+  },
+  AndroidSafeArea: {
+    flex: 1,
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   }
 });

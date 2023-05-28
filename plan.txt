@@ -4,3 +4,19 @@ So that it syncs with the doctors and it is shown automatically when MR login.
 
 Features:
 Geolocation
+
+
+Current plan with google calendar:
+Implementing agendas with google calendar API
+1.>Showing DCR in EXCEL format
+2.>Showing DCR in calendar format
+
+Strike rate:
+The no. of times visited/The no. of times required in that particular month.
+
+
+Next steps:
+Making agenda routes and implementing react native schedule with it.
+
+Agenda:
+Adding agendas.
