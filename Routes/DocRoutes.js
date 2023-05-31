@@ -25,7 +25,7 @@ router.post(
             { $inc: { seq: 1 } },
             { new: true }
           );
-          if (!saved) {
+          if (!saved) {                   // Sequence initiator if none is created.
             const initial = new MrCounter({ id: "docval", seq: 1 });
             initial.save();
             const dr = new DOC({
@@ -75,11 +75,24 @@ router.post("/assignAreaToMR", async (req, res, next) => {
   res.send("Its Done");
 });
 
+// Assigning areas to doctors in area_ids of doctors.
+router.post("/assignAreatoDoctor",async(req,res,next)=>{
+  let area_id = req.body.area;
+  var doc = await DOC.findOneAndUpdate(
+    {phone:req.body.phone},
+    {$push:{area_ids:area_id}},
+    {new:true}
+    );
+    res.send(doc);
+});
+
+// Fetching all doctors
 router.get("/fetchAllDoc", async (req, res, next) => {
   const doctors = await DOC.find({});
   res.send(doctors); //to be updated later in frontend
 });
 
+//Area to doctor mapping. 
 router.get("/fetchDocforAllArea", async (req, res, next) => {
   const allAreas = await Area.find({});
   let areaToDoctors = {};
@@ -97,7 +110,8 @@ router.get("/fetchDocforAllArea", async (req, res, next) => {
   await Promise.all(wait);
   res.send(areaToDoctors);
 });
-// mrmapping i'll get the mrs to areas to the corresponding doctors of that area.
+
+// mrmapping is to get the mrs to areas to the corresponding doctors of that area. MR--->Areas--->Doctors.
 router.get("/mrcategorization", async (req, res, next) => {
   let MRmapping = {};
   const MRs = await MR.find({});
@@ -124,6 +138,12 @@ router.get("/mrcategorization", async (req, res, next) => {
   res.send(MRmapping);
 });
 
+// Fetch a specific doctor.
+router.get("/fetchDoctor",async(req,res)=>{
+  var doc = DOC.findOne({phone:req.body.phone});
+  res.send(doc);
+  
+})
+
 module.exports = router;
 
-// mr wise categorization

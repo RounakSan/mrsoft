@@ -37,5 +37,10 @@ const doc = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "MR",
   },
+  area_ids:{
+    type:[mongoose.Schema.Types.ObjectId],
+    ref:"Area",
+    required:true,
+  },
 });
 module.exports = mongoose.model("Doctor", doc);

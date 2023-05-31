@@ -15,8 +15,17 @@ Strike rate:
 The no. of times visited/The no. of times required in that particular month.
 
 
-Next steps:
-Making agenda routes and implementing react native schedule with it.
-
 Agenda:
 Adding agendas.
+
+During agenda saving , when the MR object is required. save in the local storage and during creation of agenda fetch it from local storage and use it.
+
+
+Some Correction:
+Correct the doctor routes as the new field added.
+Check for the area routes if its needed to be corrected
+
+
+TO-DO List:
+check for the conditional statements handled by thr server.
+Like the server failures and stuff.
