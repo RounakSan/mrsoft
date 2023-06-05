@@ -1,5 +1,7 @@
 import React, {useRef, useCallback} from 'react';
-import {SafeAreaView, StyleSheet,Platform,StatusBar} from 'react-native';
+import { AntDesign } from '@expo/vector-icons'
+import {NativeBaseProvider,Fab,Icon} from 'native-base';
+import {SafeAreaView, StyleSheet,Platform,StatusBar,View} from 'react-native';
 import {ExpandableCalendar, AgendaList, CalendarProvider, WeekCalendar} from 'react-native-calendars';
 import testIDs from '../testIDs';
 import {agendaItems, getMarkedDates} from '../mocks/agendaItems';
@@ -37,12 +39,13 @@ const ExpandableCalendarScreen = (props: Props) => {
   
 
   return (
+    <NativeBaseProvider>
     <SafeAreaView style={styles.AndroidSafeArea}> 
     <CalendarProvider
       date={ITEMS[1]?.title}
       // onDateChanged={onDateChanged}
       // onMonthChange={onMonthChange}
-      showTodayButton
+      // showTodayButton
       // disabledOpacity={0.6}
       theme={todayBtnTheme.current}
       // todayBottomMargin={16}
@@ -70,14 +73,21 @@ const ExpandableCalendarScreen = (props: Props) => {
           // closeOnDayPress={false}
         />
       )}
-      <AgendaList
+      <View>
+        <AgendaList
         sections={ITEMS}
         renderItem={renderItem}
         // scrollToNextEvent
         sectionStyle={styles.section}
         // dayFormat={'yyyy-MM-d'}
       />
-    </CalendarProvider></SafeAreaView>
+      <Fab renderInPortal={false} shadow={2} size="sm" placement='top-right' icon={<Icon color="white" as={AntDesign} name="plus" size="sm" />} />
+      </View>
+      
+    </CalendarProvider>
+    
+    </SafeAreaView>
+    </NativeBaseProvider>
   );
 };
 
