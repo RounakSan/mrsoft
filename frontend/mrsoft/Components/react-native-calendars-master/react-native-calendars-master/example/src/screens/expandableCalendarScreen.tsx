@@ -25,44 +25,45 @@ const ExpandableCalendarScreen = (props: Props) => {
     todayButtonTextColor: themeColor
   });
   const [showModal, setShowModal] = useState(false);
-  const addAgenda = ()=>{
-    setShowModal(true);
-    console.log(showModal);
-  return (<>
-      <Modal isOpen={showModal} onClose={() => setShowModal(false)} _backdrop={{
-      _dark: {
-        bg: "coolGray.800"
-      },
-      bg: "warmGray.50"
-    }}>
-        <Modal.Content maxWidth="350" maxH="212">
-          <Modal.CloseButton />
-          <Modal.Header>Return Policy</Modal.Header>
-          <Modal.Body>
-            Create a 'Return Request' under “My Orders” section of App/Website.
-            Follow the screens that come up after tapping on the 'Return'
-            button. Please make a note of the Return ID that we generate at the
-            end of the process. Keep the item ready for pick up or ship it to us
-            basis on the return mode.
-          </Modal.Body>
-          <Modal.Footer>
-            <Button.Group space={2}>
-              <Button variant="ghost" colorScheme="blueGray" onPress={() => {
-              setShowModal(false);
-            }}>
-                Cancel
-              </Button>
-              <Button onPress={() => {
-              setShowModal(false);
-            }}>
-                Save
-              </Button>
-            </Button.Group>
-          </Modal.Footer>
-        </Modal.Content>
-      </Modal>
-    </>);
-  }
+  // const modalRef = useRef(null);
+
+  // const addAgenda = ()=>{
+  // return (<Center>
+  //     <Button ref={modalRef} onPress={() => setShowModal(true)}>Button</Button>
+  //     <Modal isOpen={showModal} onClose={() => setShowModal(false)} _backdrop={{
+  //     _dark: {
+  //       bg: "coolGray.800"
+  //     },
+  //     bg: "warmGray.50"
+  //   }}>
+  //       <Modal.Content maxWidth="350" maxH="212">
+  //         <Modal.CloseButton />
+  //         <Modal.Header>Return Policy</Modal.Header>
+  //         <Modal.Body>
+  //           Create a 'Return Request' under “My Orders” section of App/Website.
+  //           Follow the screens that come up after tapping on the 'Return'
+  //           button. Please make a note of the Return ID that we generate at the
+  //           end of the process. Keep the item ready for pick up or ship it to us
+  //           basis on the return mode.
+  //         </Modal.Body>
+  //         <Modal.Footer>
+  //           <Button.Group space={2}>
+  //             <Button variant="ghost" colorScheme="blueGray" onPress={() => {
+  //             setShowModal(false);
+  //           }}>
+  //               Cancel
+  //             </Button>
+  //             <Button onPress={() => {
+  //             setShowModal(false);
+  //           }}>
+  //               Save
+  //             </Button>
+  //           </Button.Group>
+  //         </Modal.Footer>
+  //       </Modal.Content>
+  //     </Modal>
+  //   </Center>);
+  // }
 
   // const onDateChanged = useCallback((date, updateSource) => {
   //   console.log('ExpandableCalendarScreen onDateChanged: ', date, updateSource);
@@ -120,7 +121,39 @@ const ExpandableCalendarScreen = (props: Props) => {
         sectionStyle={styles.section}
         // dayFormat={'yyyy-MM-d'}
       />
-      <Fab onPress={addAgenda} renderInPortal={false} shadow={2} size="sm" placement='top-right' icon={<Icon color="white" as={AntDesign} name="plus" size="sm" />} />
+      <Fab onPress={() => setShowModal(true)} renderInPortal={false} shadow={2} size="sm" placement='top-right' icon={<Icon color="white" as={AntDesign} name="plus" size="sm" />} />
+      <Modal isOpen={showModal} onClose={() => setShowModal(false)} _backdrop={{
+      _dark: {
+        bg: "coolGray.800"
+      },
+      bg: "warmGray.50"
+    }}>
+        <Modal.Content maxWidth="350" maxH="212">
+          <Modal.CloseButton />
+          <Modal.Header>Return Policy</Modal.Header>
+          <Modal.Body>
+            Create a 'Return Request' under “My Orders” section of App/Website.
+            Follow the screens that come up after tapping on the 'Return'
+            button. Please make a note of the Return ID that we generate at the
+            end of the process. Keep the item ready for pick up or ship it to us
+            basis on the return mode.
+          </Modal.Body>
+          <Modal.Footer>
+            <Button.Group space={2}>
+              <Button variant="ghost" colorScheme="blueGray" onPress={() => {
+              setShowModal(false);
+            }}>
+                Cancel
+              </Button>
+              <Button onPress={() => {
+              setShowModal(false);
+            }}>
+                Save
+              </Button>
+            </Button.Group>
+          </Modal.Footer>
+        </Modal.Content>
+      </Modal>
       </View>      
     </CalendarProvider>
     
