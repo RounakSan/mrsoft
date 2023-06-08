@@ -29,3 +29,8 @@ Check for the area routes if its needed to be corrected
 TO-DO List:
 check for the conditional statements handled by thr server.
 Like the server failures and stuff.
+
+
+
+New:
+Rendering the agendas and connecting the frontend.
