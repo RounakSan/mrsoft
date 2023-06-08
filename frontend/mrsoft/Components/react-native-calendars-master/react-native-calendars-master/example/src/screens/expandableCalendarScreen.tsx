@@ -1,6 +1,6 @@
-import React, {useRef, useCallback} from 'react';
+import React, {useRef, useCallback,useState} from 'react';
 import { AntDesign } from '@expo/vector-icons'
-import {NativeBaseProvider,Fab,Icon} from 'native-base';
+import {NativeBaseProvider,Fab,Icon,Button,Modal} from 'native-base';
 import {SafeAreaView, StyleSheet,Platform,StatusBar,View} from 'react-native';
 import {ExpandableCalendar, AgendaList, CalendarProvider, WeekCalendar} from 'react-native-calendars';
 import testIDs from '../testIDs';
@@ -24,6 +24,45 @@ const ExpandableCalendarScreen = (props: Props) => {
   const todayBtnTheme = useRef({
     todayButtonTextColor: themeColor
   });
+  const [showModal, setShowModal] = useState(false);
+  const addAgenda = ()=>{
+    setShowModal(true);
+    console.log(showModal);
+  return (<>
+      <Modal isOpen={showModal} onClose={() => setShowModal(false)} _backdrop={{
+      _dark: {
+        bg: "coolGray.800"
+      },
+      bg: "warmGray.50"
+    }}>
+        <Modal.Content maxWidth="350" maxH="212">
+          <Modal.CloseButton />
+          <Modal.Header>Return Policy</Modal.Header>
+          <Modal.Body>
+            Create a 'Return Request' under “My Orders” section of App/Website.
+            Follow the screens that come up after tapping on the 'Return'
+            button. Please make a note of the Return ID that we generate at the
+            end of the process. Keep the item ready for pick up or ship it to us
+            basis on the return mode.
+          </Modal.Body>
+          <Modal.Footer>
+            <Button.Group space={2}>
+              <Button variant="ghost" colorScheme="blueGray" onPress={() => {
+              setShowModal(false);
+            }}>
+                Cancel
+              </Button>
+              <Button onPress={() => {
+              setShowModal(false);
+            }}>
+                Save
+              </Button>
+            </Button.Group>
+          </Modal.Footer>
+        </Modal.Content>
+      </Modal>
+    </>);
+  }
 
   // const onDateChanged = useCallback((date, updateSource) => {
   //   console.log('ExpandableCalendarScreen onDateChanged: ', date, updateSource);
@@ -81,9 +120,8 @@ const ExpandableCalendarScreen = (props: Props) => {
         sectionStyle={styles.section}
         // dayFormat={'yyyy-MM-d'}
       />
-      <Fab renderInPortal={false} shadow={2} size="sm" placement='top-right' icon={<Icon color="white" as={AntDesign} name="plus" size="sm" />} />
-      </View>
-      
+      <Fab onPress={addAgenda} renderInPortal={false} shadow={2} size="sm" placement='top-right' icon={<Icon color="white" as={AntDesign} name="plus" size="sm" />} />
+      </View>      
     </CalendarProvider>
     
     </SafeAreaView>

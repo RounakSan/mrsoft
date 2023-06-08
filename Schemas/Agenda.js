@@ -19,9 +19,6 @@ const agenda = mongoose.Schema({
   },
   date: {
     type:Date,
-  },
-  time:{
-    type:Timestamp,
   }
 });
 module.exports = mongoose.model("Agenda", agenda);
