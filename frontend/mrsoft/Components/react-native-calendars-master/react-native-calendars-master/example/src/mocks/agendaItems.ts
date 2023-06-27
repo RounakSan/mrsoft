@@ -2,7 +2,7 @@ import isEmpty from 'lodash/isEmpty';
 import {MarkedDates} from '../../../src/types';
 
 const today = new Date().toISOString().split('T')[0];
-const fastDate = getPastDate(3);
+const fastDate = getPastDate(6);
 const futureDates = getFutureDates(12);
 const dates = [fastDate, today].concat(futureDates);
 
@@ -130,3 +130,4 @@ export function getMarkedDates() {
   });
   return marked;
 }
+

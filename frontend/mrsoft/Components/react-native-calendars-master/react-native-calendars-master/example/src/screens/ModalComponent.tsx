@@ -12,48 +12,16 @@ export default function ModalComponent() {
     }}>
         <Box>
           <Text bold fontSize="xl" mb="4">
-            Default
+            Date
           </Text>
           <FormControl mb="5">
-            <FormControl.Label>Project Title</FormControl.Label>
+            <FormControl.Label>Doctor Name</FormControl.Label>
             <Input />
             <FormControl.HelperText>
-              <Text>Give your project a title.</Text>
+              <Text>Select your doctor</Text>
             </FormControl.HelperText>
           </FormControl>
           <Divider />
-        </Box>
-        <Box>
-          <Text bold fontSize="xl" mb="4">
-            Disabled
-          </Text>
-          <FormControl isDisabled mb="5">
-            <FormControl.Label _disabled={{
-            _text: {
-              color: "gray.400",
-              fontWeight: "bold"
-            }
-          }}>
-              Project Title
-            </FormControl.Label>
-            <Input placeholder="Title" />
-            <FormControl.HelperText>
-              <Text>Give your project a title.</Text>
-            </FormControl.HelperText>
-          </FormControl>
-          <Divider />
-        </Box>
-        <Box>
-          <Text bold fontSize="xl" mb="4">
-            Invalid
-          </Text>
-          <FormControl isInvalid>
-            <FormControl.Label>Project Title</FormControl.Label>
-            <Input placeholder="Title" />
-            <FormControl.ErrorMessage leftIcon={<WarningOutlineIcon size="xs" />}>
-              Something is wrong.
-            </FormControl.ErrorMessage>
-          </FormControl>
         </Box>
       </Stack>
     {/* </ScrollView>; */}

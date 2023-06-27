@@ -26,6 +26,10 @@ const ExpandableCalendarScreen = (props: Props) => {
     todayButtonTextColor: themeColor
   });
   const [showModal, setShowModal] = useState(false);
+  const addAgenda = ()=>{
+    setShowModal(true);
+    
+  }
   // const modalRef = useRef(null);
 
   // const addAgenda = ()=>{
@@ -76,6 +80,7 @@ const ExpandableCalendarScreen = (props: Props) => {
           leftArrowImageSource={leftArrowIcon}
           rightArrowImageSource={rightArrowIcon}
           // animateScroll
+          onDayLongPress={addAgenda}
           // closeOnDayPress={false}
         />
       )}
@@ -94,7 +99,7 @@ const ExpandableCalendarScreen = (props: Props) => {
       },
       bg: "warmGray.50"
     }}>
-        <Modal.Content maxWidth="350" maxH="212">
+        <Modal.Content maxWidth="500" maxH="600">
           <Modal.CloseButton />
           <Modal.Header>Add Agenda</Modal.Header>
           <Modal.Body>
